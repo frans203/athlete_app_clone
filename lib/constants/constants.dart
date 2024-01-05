@@ -47,4 +47,4 @@ const List<dynamic> reviewsMock = [
     }
   }
 ];
-const int MAX_REVIEWS = 2;
+const int MAX_REVIEWS = 1;

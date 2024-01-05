@@ -18,7 +18,8 @@ class _ListingReviewsSectionState extends State<ListingReviewsSection> {
         context.read<SingleListingCubit>().state.currentListing;
     // List<dynamic> currentReviews =
     //     context.read<SingleListingCubit>().state.currentListingReviews;
-    List<dynamic> currentReviews = reviewsMock;
+    List<dynamic> currentReviews = [...reviewsMock];
+    print(currentReviews);
 
     return currentReviews.length > 0
         ? Container(
@@ -75,7 +76,7 @@ class _ListingReviewsSectionState extends State<ListingReviewsSection> {
                           ? Column(
                               children: [
                                 for (var i = 0;
-                                    currentReviews.length > 1 &&
+                                    currentReviews.length > MAX_REVIEWS &&
                                             !state.showAllReviews
                                         ? i < MAX_REVIEWS
                                         : i < currentReviews.length;
