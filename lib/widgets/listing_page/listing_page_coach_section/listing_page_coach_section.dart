@@ -101,7 +101,10 @@ class ListingPageCoachSection extends StatelessWidget {
             height: 16.0,
           ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, '/coach',
+                  arguments: {"coachId": currentCoach['id']});
+            },
             child: Text(
               "View Full Profile",
               style: TextStyle(color: Color(0xffB9C3FF), fontSize: 14.0),

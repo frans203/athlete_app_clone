@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pod1um_flutter_clone/helper_functions/get_initials.dart';
-import 'package:pod1um_flutter_clone/pages/single_listing_page.dart';
 import 'package:star_rating/star_rating.dart';
 
 class ListingCard extends StatefulWidget {
@@ -22,15 +21,17 @@ class _ListingCardState extends State<ListingCard> {
       height: 361,
       child: InkWell(
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => SingleListingPage(key: UniqueKey()),
-              settings: RouteSettings(
-                arguments: {"listing": widget.currentItem},
-              ),
-            ),
-          );
+          Navigator.pushNamed(context, "/listing",
+              arguments: {"listing": widget.currentItem});
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: (context) => SingleListingPage(key: UniqueKey()),
+          //     settings: RouteSettings(
+          //       arguments: {"listing": widget.currentItem},
+          //     ),
+          //   ),
+          // );
         },
         child: Column(
           children: [

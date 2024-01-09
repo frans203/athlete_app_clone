@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 
-class ListingPageCoachImage extends StatelessWidget {
+class CoachPageCoverImage extends StatelessWidget {
   String imageUrl;
-  double? size;
-  ListingPageCoachImage({required this.imageUrl, this.size});
+  CoachPageCoverImage({required this.imageUrl});
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: size ?? 72,
-      width: size ?? 72,
+      width: double.maxFinite,
+      height: 275,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: Colors.black, width: 4.0),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(10),
+          topRight: Radius.circular(10),
+        ),
         image: DecorationImage(
           fit: BoxFit.cover,
           image: NetworkImage(imageUrl),

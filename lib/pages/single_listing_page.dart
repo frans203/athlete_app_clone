@@ -32,6 +32,7 @@ class _SingleListingPageState extends State<SingleListingPage> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(55),

@@ -47,8 +47,7 @@ class TrainingPlansView extends StatelessWidget {
                         return LoadMoreBtn();
                       } else if (index < state.listings['rows'].length) {
                         final currentItem = state.listings['rows'][index];
-                        return Expanded(
-                            child: ListingCard(currentItem: currentItem));
+                        return ListingCard(currentItem: currentItem);
                       } else {
                         return Container();
                       }

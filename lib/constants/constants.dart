@@ -48,3 +48,22 @@ const List<dynamic> reviewsMock = [
   }
 ];
 const int MAX_REVIEWS = 1;
+
+const List<dynamic> mockTestimonials = [
+  {
+    "url": "https://d2vnlh7fxfujna.cloudfront.net/pYjBThOXUwfVpFgMBWYQB.png",
+    "name": "Conor Finn",
+    "order": 0,
+    "fileName": "pYjBThOXUwfVpFgMBWYQB.png",
+    "description": "This is my testimonial 2",
+    "organisation": "Mayo GAA"
+  },
+  {
+    "url": "https://d2vnlh7fxfujna.cloudfront.net/h5GcZLIKoFNE7v0Vyw5Uf.jpg",
+    "name": "asdasdasd",
+    "order": 1,
+    "fileName": "h5GcZLIKoFNE7v0Vyw5Uf.jpg",
+    "description": "asdasdasd",
+    "organisation": "asdasdas"
+  }
+];

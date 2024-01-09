@@ -60,6 +60,10 @@ class _BottomAppBarItemState extends State<BottomAppBarItem> {
           ),
           onPressed: () {
             context.read<PagesCubit>().changePage(widget.pageToChange);
+            final currentLocation = ModalRoute.of(context)!.settings.name;
+            if (currentLocation != "/") {
+              Navigator.pushNamed(context, "/");
+            }
           },
         );
       },
