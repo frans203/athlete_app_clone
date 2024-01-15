@@ -23,7 +23,6 @@ class _BottomAppBarItemState extends State<BottomAppBarItem> {
   Widget build(BuildContext context) {
     return BlocBuilder<PagesCubit, PageState>(
       builder: (context, state) {
-        print('state bottom: $state');
         return ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: Color(0xff131316),

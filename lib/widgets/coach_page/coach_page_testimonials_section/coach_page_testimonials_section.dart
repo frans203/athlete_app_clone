@@ -9,7 +9,8 @@ class CoachPageTestimonialsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // List<dynamic> currentTestimonials = [...mockTestimonials];
-    List<dynamic> currentTestimonials = context.read<SingleCoachCubit>().state.currentCoach['testimonials'];
+    List<dynamic> currentTestimonials =
+        context.read<SingleCoachCubit>().state.currentCoach['testimonials'];
     return currentTestimonials.length > 0
         ? Container(
             padding: EdgeInsets.all(16.0),

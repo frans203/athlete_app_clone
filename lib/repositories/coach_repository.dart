@@ -12,14 +12,30 @@ class CoachRepository {
         Uri(scheme: "https", host: kApiUrl, path: "/v1/users/${id}");
     try {
       final http.Response response = await httpClient.get(uri);
-      print('response item:');
-      print(id);
-      print(response);
       if (response.statusCode != 200) {
         throw Exception(response);
       }
       final singleListing = json.decode(response.body);
       return singleListing;
+    } catch (error) {
+      print(error);
+    }
+  }
+
+  Future<dynamic> getListingsByCoach({required int coachId}) async {
+    final Uri uri = Uri(
+        scheme: "https",
+        host: kApiUrl,
+        path: "/v1/listings",
+        queryParameters: {"coachId": "$coachId", "type": "training"});
+
+    try {
+      final http.Response response = await httpClient.get(uri);
+      if (response.statusCode != 200) {
+        throw Exception(response);
+      }
+      final coachListings = json.decode(response.body);
+      return coachListings;
     } catch (error) {
       print(error);
     }

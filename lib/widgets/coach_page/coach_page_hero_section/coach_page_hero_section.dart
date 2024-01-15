@@ -4,12 +4,11 @@ import 'package:pod1um_flutter_clone/cubits/single_coach/single_coach_cubit.dart
 import 'package:pod1um_flutter_clone/widgets/coach_page/coach_page_hero_section/coach_page_cover_image.dart';
 import 'package:pod1um_flutter_clone/widgets/coach_page/coach_page_hero_section/coach_page_isNew.dart';
 import 'package:pod1um_flutter_clone/widgets/coach_page/coach_page_hero_section/coach_page_share_follow.dart';
-import 'package:pod1um_flutter_clone/widgets/global/custom_tab_bar/custom_tab_bar.dart';
 import 'package:pod1um_flutter_clone/widgets/listing_page/listing_page_coach_image/listing_page_coach_image.dart';
 import 'package:star_rating/star_rating.dart';
 
 class CoachPageHeroSection extends StatefulWidget {
-  const CoachPageHeroSection({super.key});
+  CoachPageHeroSection();
 
   @override
   State<CoachPageHeroSection> createState() => _CoachPageHeroSectionState();
@@ -21,7 +20,6 @@ class _CoachPageHeroSectionState extends State<CoachPageHeroSection>
   Widget build(BuildContext context) {
     dynamic currentCoach = context.read<SingleCoachCubit>().state.currentCoach;
     int currentScore = currentCoach['score'];
-    TabController _tabController = TabController(length: 4, vsync: this);
 
     return Container(
       child: Column(
@@ -86,22 +84,6 @@ class _CoachPageHeroSectionState extends State<CoachPageHeroSection>
           SizedBox(
             height: 20,
           ),
-          Container(
-            decoration: BoxDecoration(
-                border: Border(
-                    bottom: BorderSide(color: Color(0xff353438), width: 2.0))),
-            child: CustomTabBar(
-              tabItems: [
-                'About',
-                'Testimonials',
-                'Training Plans',
-                '1 to 1 Coaching'
-              ],
-              tabController: _tabController,
-              isScrollable: true,
-              tabBarIndicatorSize: TabBarIndicatorSize.tab,
-            ),
-          )
         ],
       ),
     );

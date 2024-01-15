@@ -5,11 +5,12 @@ class CustomTabBar extends StatefulWidget {
   TabController tabController;
   bool? isScrollable;
   TabBarIndicatorSize? tabBarIndicatorSize;
-  CustomTabBar(
-      {required this.tabItems,
-      required this.tabController,
-      this.isScrollable,
-      this.tabBarIndicatorSize});
+  CustomTabBar({
+    required this.tabItems,
+    required this.tabController,
+    this.isScrollable,
+    this.tabBarIndicatorSize,
+  });
 
   @override
   State<CustomTabBar> createState() => _CustomTabBarState();

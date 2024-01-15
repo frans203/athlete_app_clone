@@ -35,7 +35,6 @@ class _MainPageState extends State<MainPage> {
             preferredSize: Size.fromHeight(55)),
         bottomNavigationBar: BottomNavBar(),
         body: BlocBuilder<PagesCubit, PageState>(builder: (context, state) {
-          print("state: ${state}");
           if (state.currentPage == Pages.HOME) {
             return HomePage();
           } else if (state.currentPage == Pages.EXPLORE) {

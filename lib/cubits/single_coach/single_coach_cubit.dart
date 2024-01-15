@@ -16,9 +16,12 @@ class SingleCoachCubit extends Cubit<SingleCoachState> {
     emit(state.copyWith(singleCoachPageStatus: SingleCoachPageStatus.LOADING));
     try {
       final dynamic coach = await coachRepository.getSingleCoach(id: coachId);
+      final dynamic coachListings =
+          await coachRepository.getListingsByCoach(coachId: coachId);
       emit(
         state.copyWith(
             singleCoachPageStatus: SingleCoachPageStatus.LOADED,
+            coachListings: coachListings['rows'],
             currentCoach: coach),
       );
     } catch (error) {
@@ -33,5 +36,9 @@ class SingleCoachCubit extends Cubit<SingleCoachState> {
 
   void invertShowAllTestimonials() {
     emit(state.copyWith(showAllTestimonials: !state.showAllTestimonials));
+  }
+
+  void showScrollableTabBar(bool show) {
+    emit(state.copyWith(showScrollableTabBar: show));
   }
 }
