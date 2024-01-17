@@ -6,6 +6,7 @@ import 'package:pod1um_flutter_clone/cubits/login/login_cubit.dart';
 import 'package:pod1um_flutter_clone/cubits/pages/pages_cubit.dart';
 import 'package:pod1um_flutter_clone/cubits/single_coach/single_coach_cubit.dart';
 import 'package:pod1um_flutter_clone/cubits/single_listing/single_listing_cubit.dart';
+import 'package:pod1um_flutter_clone/pages/initial_page.dart';
 import 'package:pod1um_flutter_clone/pages/login_page.dart';
 import 'package:pod1um_flutter_clone/pages/main_page.dart';
 import 'package:pod1um_flutter_clone/pages/single_coach_page.dart';
@@ -67,11 +68,12 @@ class _Pod1umAppState extends State<Pod1umApp> {
           ),
           title: "POD1UM app",
           debugShowCheckedModeBanner: false,
-          home: LoginPage(),
           routes: {
             '/listing': (context) => SingleListingPage(),
             '/coach': (context) => SingleCoachPage(),
             '/main': (context) => MainPage(),
+            '/login': (context) => LoginPage(),
+            '/': (context) => InitialPage(),
           },
         ),
       ),

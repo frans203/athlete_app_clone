@@ -39,6 +39,8 @@ class SingleCoachCubit extends Cubit<SingleCoachState> {
   }
 
   void showScrollableTabBar(bool show) {
-    emit(state.copyWith(showScrollableTabBar: show));
+    emit(state.copyWith(
+        showScrollableTabBar: show,
+        singleCoachPageStatus: SingleCoachPageStatus.LOADED));
   }
 }

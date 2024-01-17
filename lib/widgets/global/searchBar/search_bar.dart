@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 
 class SearchTopBar extends StatefulWidget {
-  const SearchTopBar({super.key});
+  SearchTopBar({super.key});
 
   @override
   State<SearchTopBar> createState() => _SearchTopBarState();
 }
 
 class _SearchTopBarState extends State<SearchTopBar> {
-  List<String> searchOption = ["Workouts", "Training Plans", "Coaches"];
+  final List<String> searchOption = ["Workouts", "Training Plans", "Coaches"];
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String? userInput;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,9 +35,13 @@ class _SearchTopBarState extends State<SearchTopBar> {
             ),
             Form(
               key: _formKey,
-              autovalidateMode: AutovalidateMode.disabled,
               child: Expanded(
-                child: TextField(
+                child: TextFormField(
+                  onChanged: (String? value) {
+                    setState(() {
+                      userInput = value;
+                    });
+                  },
                   style: TextStyle(
                     color: Color(0xffC6C5D0),
                   ),

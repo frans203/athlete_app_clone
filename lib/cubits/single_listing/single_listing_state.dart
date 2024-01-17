@@ -13,6 +13,7 @@ class SingleListingState extends Equatable {
   dynamic currentListingReviews;
   bool showAllReviews;
   SingleListingStatus status;
+  bool isSavedCurrentListing;
 
   SingleListingState({
     required this.currentListing,
@@ -20,6 +21,7 @@ class SingleListingState extends Equatable {
     required this.status,
     required this.currentListingReviews,
     required this.showAllReviews,
+    required this.isSavedCurrentListing,
   });
 
   factory SingleListingState.initial() {
@@ -29,6 +31,7 @@ class SingleListingState extends Equatable {
       currentListingReviews: [],
       status: SingleListingStatus.INITIAL,
       showAllReviews: false,
+      isSavedCurrentListing: false,
     );
   }
 
@@ -47,14 +50,16 @@ class SingleListingState extends Equatable {
     dynamic status,
     dynamic currentListingReviews,
     bool? showAllReviews,
+    bool? isSavedCurrentListing,
   }) {
     return SingleListingState(
-      currentCoachListing: currentCoachListing ?? this.currentCoachListing,
-      currentListing: currentListing ?? this.currentListing,
-      status: status ?? this.status,
-      currentListingReviews:
-          currentListingReviews ?? this.currentListingReviews,
-      showAllReviews: showAllReviews ?? this.showAllReviews,
-    );
+        currentCoachListing: currentCoachListing ?? this.currentCoachListing,
+        currentListing: currentListing ?? this.currentListing,
+        status: status ?? this.status,
+        currentListingReviews:
+            currentListingReviews ?? this.currentListingReviews,
+        showAllReviews: showAllReviews ?? this.showAllReviews,
+        isSavedCurrentListing:
+            isSavedCurrentListing ?? this.isSavedCurrentListing);
   }
 }

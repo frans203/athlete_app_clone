@@ -21,64 +21,57 @@ class _SingleListingPageState extends State<SingleListingPage> {
   String routeName = '/listing';
 
   @override
-  void didChangeDependencies() {
+  Widget build(BuildContext context) {
     super.didChangeDependencies();
     final dynamic arguments = ModalRoute.of(context)?.settings.arguments;
     final dynamic listing = arguments["listing"];
     context.read<SingleListingCubit>().setCurrentListingPageData(
         coachId: listing['user']['id'], currentListing: listing);
-  }
 
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(55),
+    return Scaffold(
+      appBar: PreferredSize(
           child: SafeArea(
             child: SearchTopBar(),
           ),
-        ),
-        bottomNavigationBar: BottomNavBar(),
-        body: SingleChildScrollView(
-          child: Container(
-            width: double.maxFinite,
-            child: BlocConsumer<SingleListingCubit, SingleListingState>(
-              builder: (context, state) {
-                if (state.status == SingleListingStatus.LOADING) {
-                  return Container(
-                    margin: EdgeInsets.only(top: 20),
-                    child: Center(
-                      child: CircularProgressIndicator(),
+          preferredSize: Size.fromHeight(55)),
+      bottomNavigationBar: BottomNavBar(),
+      body: SingleChildScrollView(
+        child: Container(
+          width: double.maxFinite,
+          child: BlocConsumer<SingleListingCubit, SingleListingState>(
+            builder: (context, state) {
+              if (state.status == SingleListingStatus.LOADING) {
+                return Container(
+                  margin: EdgeInsets.only(top: 20),
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+              } else if (state.status == SingleListingStatus.LOADED) {
+                return Container(
+                  decoration: BoxDecoration(
+                    color: Color(0xff131316),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(16),
                     ),
-                  );
-                } else if (state.status == SingleListingStatus.LOADED) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: Color(0xff131316),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(16),
-                      ),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ListingPageHeroSection(),
-                        ListingPageHeaderSection(),
-                        ListingPageDetailsSection(),
-                        ListingJoinModal(),
-                        ListingPageCoachSection(),
-                        ListingReviewsSection(),
-                      ],
-                    ),
-                  );
-                } else {
-                  return Container();
-                }
-              },
-              listener: (context, state) {},
-            ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ListingPageHeroSection(),
+                      ListingPageHeaderSection(),
+                      ListingPageDetailsSection(),
+                      ListingJoinModal(),
+                      ListingPageCoachSection(),
+                      ListingReviewsSection(),
+                    ],
+                  ),
+                );
+              } else {
+                return Container();
+              }
+            },
+            listener: (context, state) {},
           ),
         ),
       ),
