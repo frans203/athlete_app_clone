@@ -53,6 +53,8 @@ class _ScrollableTabBarState extends State<ScrollableTabBar>
       controller: widget.tabController,
       indicatorSize: widget.tabBarIndicatorSize ?? TabBarIndicatorSize.label,
       labelColor: Color(0xffB9C3FF),
+      dividerColor: Color(0xff353438),
+      dividerHeight: 1.0,
       labelStyle: TextStyle(fontWeight: FontWeight.w500),
       unselectedLabelStyle: TextStyle(fontWeight: FontWeight.w400),
       unselectedLabelColor: Color(0xffC6C5D0),

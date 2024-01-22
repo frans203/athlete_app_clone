@@ -1,13 +1,14 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pod1um_flutter_clone/cubits/single_coach/single_coach_cubit.dart';
 import 'package:pod1um_flutter_clone/widgets/coach_page/coach_page_builder/coach_page_builder.dart';
 import 'package:pod1um_flutter_clone/widgets/coach_page/coach_page_tab_bar/coach_page_tab_bar.dart';
-import 'package:pod1um_flutter_clone/widgets/global/bottomAppBar/bottom_navigation_bar.dart';
-import 'package:pod1um_flutter_clone/widgets/global/searchBar/search_bar.dart';
 
+@RoutePage(name: "Coach")
 class SingleCoachPage extends StatefulWidget {
-  const SingleCoachPage({super.key});
+  int coachId;
+  SingleCoachPage({@PathParam('id') required this.coachId});
   @override
   State<SingleCoachPage> createState() => _SingleCoachPageState();
 }
@@ -21,8 +22,7 @@ class _SingleCoachPageState extends State<SingleCoachPage>
 
   @override
   Widget build(BuildContext context) {
-    final dynamic arguments = ModalRoute.of(context)?.settings.arguments;
-    final dynamic coachId = arguments['coachId'];
+    final dynamic coachId = widget.coachId;
     Map<String, GlobalKey<State<StatefulWidget>>?> tabKeysMap = {
       "About": aboutSection,
       "Testimonials": testimonialsSection,
@@ -40,29 +40,21 @@ class _SingleCoachPageState extends State<SingleCoachPage>
     });
 
     return Scaffold(
-      appBar: PreferredSize(
-        child: SafeArea(
-          child: SearchTopBar(),
-        ),
-        preferredSize: Size.fromHeight(55),
-      ),
-      bottomNavigationBar: BottomNavBar(),
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            controller: scrollController,
-            child: Container(
-              width: double.maxFinite,
-              child: CoachPageBuilder(
-                tabController: _tabController,
-                coachId: coachId,
-                tabKeysMap: tabKeysMap,
-              ),
+        body: Stack(
+      children: [
+        SingleChildScrollView(
+          controller: scrollController,
+          child: Container(
+            width: double.maxFinite,
+            child: CoachPageBuilder(
+              tabController: _tabController,
+              coachId: coachId,
+              tabKeysMap: tabKeysMap,
             ),
           ),
-          CoachPageTabBar(tabKeysMap: tabKeysMap, tabController: _tabController)
-        ],
-      ),
-    );
+        ),
+        CoachPageTabBar(tabKeysMap: tabKeysMap, tabController: _tabController)
+      ],
+    ));
   }
 }

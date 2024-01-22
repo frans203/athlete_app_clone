@@ -1,8 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pod1um_flutter_clone/cubits/login/login_cubit.dart';
+import 'package:pod1um_flutter_clone/cubits/pages/pages_cubit.dart';
+import 'package:pod1um_flutter_clone/routing/app_router.dart';
 import "package:validators/validators.dart";
 
+@RoutePage(name: "Login")
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -17,6 +21,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    var router = AutoRouter.of(context);
     void _submit() {
       context.read<LoginCubit>().setIsLoading(loginStatus: LoginStatus.LOADING);
       _autovalidateMode = AutovalidateMode.always;
@@ -31,8 +36,8 @@ class _LoginPageState extends State<LoginPage> {
       context.read<LoginCubit>().singIn(email: _email, password: _password);
     }
 
-    return WillPopScope(
-      onWillPop: () async => false,
+    return PopScope(
+      canPop: false,
       child: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(
@@ -63,7 +68,8 @@ class _LoginPageState extends State<LoginPage> {
                       child: BlocConsumer<LoginCubit, LoginState>(
                         listener: (context, state) {
                           if (state.user != null) {
-                            Navigator.pushNamed(context, "/main");
+                            router.replace(DashboardRoute());
+                            context.read<PagesCubit>().changePage(Pages.HOME);
                           }
                         },
                         builder: (context, state) {

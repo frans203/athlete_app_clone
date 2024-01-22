@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pod1um_flutter_clone/cubits/single_listing/single_listing_cubit.dart';
 import 'package:pod1um_flutter_clone/helper_functions/getInterestLabel.dart';
+import 'package:pod1um_flutter_clone/routing/app_router.dart';
 import 'package:pod1um_flutter_clone/widgets/listing_page/listing_page_coach_image/listing_page_coach_image.dart';
 import 'package:pod1um_flutter_clone/widgets/listing_page/listing_page_coach_section/listing_page_coach_follow_btn.dart';
 import 'package:star_rating/star_rating.dart';
@@ -11,6 +13,7 @@ class ListingPageCoachSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var router = AutoRouter.of(context);
     dynamic currentCoach =
         context.read<SingleListingCubit>().state.currentCoachListing;
     int currentScore = currentCoach['score'];
@@ -102,8 +105,7 @@ class ListingPageCoachSection extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              Navigator.pushNamed(context, '/coach',
-                  arguments: {"coachId": currentCoach['id']});
+              router.push(Coach(coachId: currentCoach['id']));
             },
             child: Text(
               "View Full Profile",

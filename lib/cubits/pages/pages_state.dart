@@ -8,7 +8,7 @@ class PageState extends Equatable {
   PageState({required this.currentPage});
 
   factory PageState.initial() {
-    return PageState(currentPage: Pages.EXPLORE);
+    return PageState(currentPage: Pages.HOME);
   }
 
   @override

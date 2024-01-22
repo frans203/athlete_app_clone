@@ -36,12 +36,15 @@ class SingleListingCubit extends Cubit<SingleListingState> {
     }
   }
 
-  Future<void> setCurrentListingPageData(
-      {required int coachId, dynamic currentListing}) async {
+  Future<void> setCurrentListingPageData({required int id}) async {
     emit(state.copyWith(
-        status: SingleListingStatus.LOADING, currentCoachListing: null));
+        currentListing: null,
+        status: SingleListingStatus.LOADING,
+        currentCoachListing: null));
     try {
-      final dynamic coach = await coachRepository.getSingleCoach(id: coachId);
+      final dynamic currentListing = await listingRepository.getListing(id: id);
+      final dynamic coach = await coachRepository.getSingleCoach(
+          id: currentListing['user']['id']);
       final dynamic listingReviews = await listingRepository.getListingReviews(
           listingId: currentListing['id']);
       emit(

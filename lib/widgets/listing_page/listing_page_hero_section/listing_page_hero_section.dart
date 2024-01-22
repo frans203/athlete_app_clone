@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pod1um_flutter_clone/cubits/single_listing/single_listing_cubit.dart';
-import 'package:pod1um_flutter_clone/pages/main_page.dart';
 import 'package:pod1um_flutter_clone/widgets/listing_page/listing_page_hero_section/listing_page_hero_action.dart';
 import 'package:pod1um_flutter_clone/widgets/listing_page/listing_page_hero_section/listing_page_save.dart';
 import 'package:star_rating/star_rating.dart';
@@ -33,12 +32,12 @@ class ListingPageHeroSection extends StatelessWidget {
                       fontWeight: FontWeight.w400),
                 ),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => MainPage(),
-                    ),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => MainPage(),
+                  //   ),
+                  // );
                 },
               ),
               Text(

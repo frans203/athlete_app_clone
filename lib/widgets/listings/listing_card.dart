@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:pod1um_flutter_clone/helper_functions/get_initials.dart';
+import 'package:pod1um_flutter_clone/routing/app_router.dart';
 import 'package:star_rating/star_rating.dart';
 
 class ListingCard extends StatefulWidget {
@@ -15,23 +17,16 @@ class _ListingCardState extends State<ListingCard> {
   @override
   Widget build(BuildContext context) {
     List<dynamic> objectivesArray = widget.currentItem['objectives'];
+    var router = AutoRouter.of(context);
 
     return Container(
       width: 339,
       height: 361,
       child: InkWell(
         onTap: () {
-          Navigator.pushNamed(context, "/listing",
-              arguments: {"listing": widget.currentItem});
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) => SingleListingPage(key: UniqueKey()),
-          //     settings: RouteSettings(
-          //       arguments: {"listing": widget.currentItem},
-          //     ),
-          //   ),
-          // );
+          router.push(
+            SingleListing(id: widget.currentItem['id']),
+          );
         },
         child: Column(
           children: [

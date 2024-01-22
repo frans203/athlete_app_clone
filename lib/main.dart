@@ -6,14 +6,10 @@ import 'package:pod1um_flutter_clone/cubits/login/login_cubit.dart';
 import 'package:pod1um_flutter_clone/cubits/pages/pages_cubit.dart';
 import 'package:pod1um_flutter_clone/cubits/single_coach/single_coach_cubit.dart';
 import 'package:pod1um_flutter_clone/cubits/single_listing/single_listing_cubit.dart';
-import 'package:pod1um_flutter_clone/pages/initial_page.dart';
-import 'package:pod1um_flutter_clone/pages/login_page.dart';
-import 'package:pod1um_flutter_clone/pages/main_page.dart';
-import 'package:pod1um_flutter_clone/pages/single_coach_page.dart';
-import 'package:pod1um_flutter_clone/pages/single_listing_page.dart';
 import 'package:pod1um_flutter_clone/repositories/coach_repository.dart';
 import 'package:pod1um_flutter_clone/repositories/listing_repository.dart';
 import 'package:pod1um_flutter_clone/repositories/login_repository.dart';
+import 'package:pod1um_flutter_clone/routing/app_router.dart';
 
 void main() {
   runApp(const Pod1umApp());
@@ -27,6 +23,7 @@ class Pod1umApp extends StatefulWidget {
 }
 
 class _Pod1umAppState extends State<Pod1umApp> {
+  final _appRouter = AppRouter();
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
@@ -62,19 +59,13 @@ class _Pod1umAppState extends State<Pod1umApp> {
               create: (context) =>
                   LoginCubit(loginRepository: context.read<LoginRepository>()))
         ],
-        child: MaterialApp(
+        child: MaterialApp.router(
+          routerConfig: _appRouter.config(),
           theme: ThemeData(
             scaffoldBackgroundColor: Color(0xff1F1F23),
           ),
           title: "POD1UM app",
           debugShowCheckedModeBanner: false,
-          routes: {
-            '/listing': (context) => SingleListingPage(),
-            '/coach': (context) => SingleCoachPage(),
-            '/main': (context) => MainPage(),
-            '/login': (context) => LoginPage(),
-            '/': (context) => InitialPage(),
-          },
         ),
       ),
     );

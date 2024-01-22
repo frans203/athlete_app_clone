@@ -23,6 +23,8 @@ class _CustomTabBarState extends State<CustomTabBar>
     return TabBar(
       padding: EdgeInsets.only(bottom: 4.0),
       controller: widget.tabController,
+      dividerColor: Color(0xff353438),
+      dividerHeight: 1.0,
       indicatorSize: widget.tabBarIndicatorSize ?? TabBarIndicatorSize.label,
       labelColor: Color(0xffB9C3FF),
       labelStyle: TextStyle(fontWeight: FontWeight.w500),

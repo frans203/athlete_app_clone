@@ -1,8 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pod1um_flutter_clone/cubits/single_listing/single_listing_cubit.dart';
-import 'package:pod1um_flutter_clone/widgets/global/bottomAppBar/bottom_navigation_bar.dart';
-import 'package:pod1um_flutter_clone/widgets/global/searchBar/search_bar.dart';
 import 'package:pod1um_flutter_clone/widgets/listing_page/listing_modal/listing_join_modal/listing_join_modal.dart';
 import 'package:pod1um_flutter_clone/widgets/listing_page/listing_page_coach_section/listing_page_coach_section.dart';
 import 'package:pod1um_flutter_clone/widgets/listing_page/listing_page_details_section/listing_page_details_section.dart';
@@ -10,31 +9,25 @@ import 'package:pod1um_flutter_clone/widgets/listing_page/listing_page_header_se
 import 'package:pod1um_flutter_clone/widgets/listing_page/listing_page_hero_section/listing_page_hero_section.dart';
 import 'package:pod1um_flutter_clone/widgets/listing_page/listing_reviews_section/listing_reviews_section.dart';
 
+@RoutePage(name: "SingleListing")
 class SingleListingPage extends StatefulWidget {
-  SingleListingPage({super.key});
+  final int id;
+  SingleListingPage({@PathParam('id') required this.id});
 
   @override
   State<SingleListingPage> createState() => _SingleListingPageState();
 }
 
 class _SingleListingPageState extends State<SingleListingPage> {
-  String routeName = '/listing';
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    context.read<SingleListingCubit>().setCurrentListingPageData(id: widget.id);
+  }
 
   @override
   Widget build(BuildContext context) {
-    super.didChangeDependencies();
-    final dynamic arguments = ModalRoute.of(context)?.settings.arguments;
-    final dynamic listing = arguments["listing"];
-    context.read<SingleListingCubit>().setCurrentListingPageData(
-        coachId: listing['user']['id'], currentListing: listing);
-
     return Scaffold(
-      appBar: PreferredSize(
-          child: SafeArea(
-            child: SearchTopBar(),
-          ),
-          preferredSize: Size.fromHeight(55)),
-      bottomNavigationBar: BottomNavBar(),
       body: SingleChildScrollView(
         child: Container(
           width: double.maxFinite,
