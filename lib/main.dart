@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
@@ -23,9 +24,10 @@ class Pod1umApp extends StatefulWidget {
 }
 
 class _Pod1umAppState extends State<Pod1umApp> {
-  final _appRouter = AppRouter();
   @override
   Widget build(BuildContext context) {
+    final _appRouter = AppRouter();
+
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider<ListingRepository>(
@@ -60,7 +62,9 @@ class _Pod1umAppState extends State<Pod1umApp> {
                   LoginCubit(loginRepository: context.read<LoginRepository>()))
         ],
         child: MaterialApp.router(
-          routerConfig: _appRouter.config(),
+          routerConfig: _appRouter.config(
+            navigatorObservers: () => [AutoRouteObserver()],
+          ),
           theme: ThemeData(
             scaffoldBackgroundColor: Color(0xff1F1F23),
           ),
