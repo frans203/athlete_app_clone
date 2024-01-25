@@ -8,8 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 Future<void> removeUser(BuildContext context) async {
   var router = AutoRouter.of(context);
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  sharedPreferences.remove("user");
-  router.replace(Login());
-  context.read<LoginCubit>().setIsLoading(loginStatus: LoginStatus.INITIAL);
+  await sharedPreferences.remove("user");
+  context.read<LoginCubit>().removeUser();
+  router.replace(Home());
   return;
 }

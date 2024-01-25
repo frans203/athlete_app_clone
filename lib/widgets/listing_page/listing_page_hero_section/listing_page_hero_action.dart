@@ -4,13 +4,19 @@ class ListingPageHeroAction extends StatelessWidget {
   Color color;
   String text;
   IconData iconData;
+  Function action;
   ListingPageHeroAction(
-      {required this.color, required this.iconData, required this.text});
+      {required this.color,
+      required this.iconData,
+      required this.text,
+      required this.action});
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {},
+      onPressed: () {
+        action();
+      },
       style: ButtonStyle(
           padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
             EdgeInsets.symmetric(horizontal: 20, vertical: 10),

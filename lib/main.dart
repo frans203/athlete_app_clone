@@ -7,9 +7,11 @@ import 'package:pod1um_flutter_clone/cubits/login/login_cubit.dart';
 import 'package:pod1um_flutter_clone/cubits/pages/pages_cubit.dart';
 import 'package:pod1um_flutter_clone/cubits/single_coach/single_coach_cubit.dart';
 import 'package:pod1um_flutter_clone/cubits/single_listing/single_listing_cubit.dart';
+import 'package:pod1um_flutter_clone/cubits/user/user_cubit.dart';
 import 'package:pod1um_flutter_clone/repositories/coach_repository.dart';
 import 'package:pod1um_flutter_clone/repositories/listing_repository.dart';
 import 'package:pod1um_flutter_clone/repositories/login_repository.dart';
+import 'package:pod1um_flutter_clone/repositories/user_repository.dart';
 import 'package:pod1um_flutter_clone/routing/app_router.dart';
 
 void main() {
@@ -27,18 +29,21 @@ class _Pod1umAppState extends State<Pod1umApp> {
   @override
   Widget build(BuildContext context) {
     final _appRouter = AppRouter();
+    http.Client httpClient = http.Client();
 
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider<ListingRepository>(
-            create: (context) => ListingRepository(httpClient: http.Client())),
+            create: (context) => ListingRepository(httpClient: httpClient)),
         RepositoryProvider<CoachRepository>(
-            create: (context) => CoachRepository(httpClient: http.Client())),
+            create: (context) => CoachRepository(httpClient: httpClient)),
         RepositoryProvider<LoginRepository>(
           create: (context) => LoginRepository(
-            httpClient: http.Client(),
+            httpClient: httpClient,
           ),
-        )
+        ),
+        RepositoryProvider<UserRepository>(
+            create: (context) => UserRepository(httpClient: httpClient)),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -49,17 +54,23 @@ class _Pod1umAppState extends State<Pod1umApp> {
           BlocProvider<PagesCubit>(create: (context) => PagesCubit()),
           BlocProvider<SingleListingCubit>(
             create: (context) => SingleListingCubit(
+                userRepository: context.read<UserRepository>(),
                 listingRepository: context.read<ListingRepository>(),
                 coachRepository: context.read<CoachRepository>()),
           ),
           BlocProvider<SingleCoachCubit>(
             create: (context) => SingleCoachCubit(
                 listingRepository: context.read<ListingRepository>(),
-                coachRepository: context.read<CoachRepository>()),
+                coachRepository: context.read<CoachRepository>(),
+                userRepository: context.read<UserRepository>(),
+                userCubit: context.read<UserCubit>()),
           ),
           BlocProvider<LoginCubit>(
               create: (context) =>
-                  LoginCubit(loginRepository: context.read<LoginRepository>()))
+                  LoginCubit(loginRepository: context.read<LoginRepository>())),
+          BlocProvider<UserCubit>(
+            create: (context) => UserCubit(),
+          )
         ],
         child: MaterialApp.router(
           routerConfig: _appRouter.config(

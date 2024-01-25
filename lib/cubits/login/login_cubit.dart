@@ -27,4 +27,8 @@ class LoginCubit extends Cubit<LoginState> {
   void setUser({dynamic user}) {
     emit(state.copyWith(user: user));
   }
+
+  void removeUser() {
+    emit(state.copyWith(user: null, status: LoginStatus.INITIAL));
+  }
 }

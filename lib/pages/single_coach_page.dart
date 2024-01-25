@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pod1um_flutter_clone/cubits/pages/pages_cubit.dart';
 import 'package:pod1um_flutter_clone/cubits/single_coach/single_coach_cubit.dart';
 import 'package:pod1um_flutter_clone/widgets/coach_page/coach_page_builder/coach_page_builder.dart';
 import 'package:pod1um_flutter_clone/widgets/coach_page/coach_page_tab_bar/coach_page_tab_bar.dart';
@@ -14,7 +15,7 @@ class SingleCoachPage extends StatefulWidget {
 }
 
 class _SingleCoachPageState extends State<SingleCoachPage>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin, AutoRouteAwareStateMixin<SingleCoachPage> {
   var aboutSection = GlobalKey();
   var testimonialsSection = GlobalKey();
   var listingsSection = GlobalKey();
@@ -56,5 +57,21 @@ class _SingleCoachPageState extends State<SingleCoachPage>
         CoachPageTabBar(tabKeysMap: tabKeysMap, tabController: _tabController)
       ],
     ));
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didPush() {
+    context.read<PagesCubit>().changePage(Pages.EXPLORE);
+  }
+
+  @override
+  void didPopNext() {
+    context.read<PagesCubit>().changePage(Pages.EXPLORE);
   }
 }

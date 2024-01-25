@@ -16,12 +16,12 @@ class _ListingPageSaveState extends State<ListingPageSave> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SingleListingCubit, SingleListingState>(
-      builder: (context, listingsState)
-      {
+      builder: (context, listingsState) {
         return BlocBuilder<LoginCubit, LoginState>(
           builder: (context, loginState) {
             if (loginState.user != null) {
               return ListingPageHeroAction(
+                  action: () {},
                   color: Color(0xffB9C3FF),
                   iconData: Icons.bookmark_border,
                   text: "Save");

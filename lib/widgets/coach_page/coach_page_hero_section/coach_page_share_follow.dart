@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pod1um_flutter_clone/widgets/coach_page/coach_page_hero_section/coach_page_follow_btn.dart';
 import 'package:share_plus/share_plus.dart';
 
 class CoachPageShareFollow extends StatelessWidget {
@@ -18,23 +19,7 @@ class CoachPageShareFollow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.symmetric(vertical: 14, horizontal: 24),
-            backgroundColor: Color(0xff2B4EDE),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-          ),
-          onPressed: () {},
-          child: Text(
-            "Follow",
-            style: TextStyle(
-              fontSize: 14,
-              color: Color(0xffDFE1F9),
-            ),
-          ),
-        ),
+        CoachPageFollowBtn(),
         SizedBox(width: 16.0),
         InkWell(
           onTap: () async {

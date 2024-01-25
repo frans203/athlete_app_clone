@@ -9,8 +9,6 @@ class ListingRepository {
 
   Future<dynamic> getListings(
       {int? searchLimit = 10, int? searchPage = 0}) async {
-    print('search Limit : $searchLimit');
-    print("GET LISTINGS EXECUTING");
     final Uri uri = Uri(
         scheme: "https",
         host: kApiUrl,

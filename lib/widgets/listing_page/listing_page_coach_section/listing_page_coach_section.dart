@@ -106,7 +106,6 @@ class ListingPageCoachSection extends StatelessWidget {
           InkWell(
             onTap: () {
               router.push(Coach(coachId: currentCoach['id']));
-              print(context.router.current.name);
             },
             child: Text(
               "View Full Profile",

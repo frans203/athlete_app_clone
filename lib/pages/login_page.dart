@@ -22,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     var router = AutoRouter.of(context);
-    void _submit() {
+    void _submit() async {
       context.read<LoginCubit>().setIsLoading(loginStatus: LoginStatus.LOADING);
       _autovalidateMode = AutovalidateMode.always;
       final form = _formKey.currentState;
@@ -33,7 +33,9 @@ class _LoginPageState extends State<LoginPage> {
         return;
       }
       form.save();
-      context.read<LoginCubit>().singIn(email: _email, password: _password);
+      await context
+          .read<LoginCubit>()
+          .singIn(email: _email, password: _password);
     }
 
     return PopScope(
@@ -66,10 +68,10 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     Container(
                       child: BlocConsumer<LoginCubit, LoginState>(
-                        listener: (context, state) {
+                        listener: (context, state) async {
                           if (state.user != null) {
-                            router.replace(DashboardRoute());
                             context.read<PagesCubit>().changePage(Pages.HOME);
+                            router.replace(Home());
                           }
                         },
                         builder: (context, state) {
@@ -191,6 +193,16 @@ class _LoginPageState extends State<LoginPage> {
                                     ),
                                   ),
                                 ),
+                                TextButton(
+                                    onPressed: () {
+                                      router.replace(Home());
+                                    },
+                                    child: Text(
+                                      "Continue as guest",
+                                      style: TextStyle(
+                                        color: Colors.blueGrey,
+                                      ),
+                                    ))
                               ],
                             ),
                           );

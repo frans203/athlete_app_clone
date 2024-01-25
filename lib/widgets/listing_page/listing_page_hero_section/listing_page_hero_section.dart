@@ -1,8 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pod1um_flutter_clone/cubits/single_listing/single_listing_cubit.dart';
+import 'package:pod1um_flutter_clone/routing/app_router.dart';
 import 'package:pod1um_flutter_clone/widgets/listing_page/listing_page_hero_section/listing_page_hero_action.dart';
 import 'package:pod1um_flutter_clone/widgets/listing_page/listing_page_hero_section/listing_page_save.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:star_rating/star_rating.dart';
 
 class ListingPageHeroSection extends StatelessWidget {
@@ -11,9 +14,16 @@ class ListingPageHeroSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     dynamic listing = context.read<SingleListingCubit>().state.currentListing;
-    dynamic coach =
-        context.read<SingleListingCubit>().state.currentCoachListing;
+    var router = AutoRouter.of(context);
     int currentScore = listing['score'];
+
+    Future<void> shareFunction() async {
+      try {
+        await Share.share("Text");
+      } catch (error) {
+        print(error);
+      }
+    }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,12 +42,7 @@ class ListingPageHeroSection extends StatelessWidget {
                       fontWeight: FontWeight.w400),
                 ),
                 onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => MainPage(),
-                  //   ),
-                  // );
+                  router.push(Explore());
                 },
               ),
               Text(
@@ -87,6 +92,7 @@ class ListingPageHeroSection extends StatelessWidget {
         Row(
           children: [
             ListingPageHeroAction(
+                action: shareFunction,
                 color: Color(0xffB9C3FF),
                 iconData: Icons.share_outlined,
                 text: "Share"),

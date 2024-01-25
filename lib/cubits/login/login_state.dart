@@ -19,8 +19,9 @@ class LoginState extends Equatable {
 
   List<Object?> get props => [status, user];
 
-  LoginState copyWith({LoginStatus? status, dynamic user}) {
-    return LoginState(status: status ?? this.status, user: user ?? this.user);
+  LoginState copyWith({LoginStatus? status, Object? user}) {
+    return LoginState(
+        status: status ?? this.status, user: user != null ? user : null);
   }
 
   @override

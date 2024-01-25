@@ -7,6 +7,7 @@ import 'package:pod1um_flutter_clone/pages/initial_page.dart';
 import 'package:pod1um_flutter_clone/pages/library_page.dart';
 import 'package:pod1um_flutter_clone/pages/login_page.dart';
 import 'package:pod1um_flutter_clone/pages/single_coach_page.dart';
+import 'package:pod1um_flutter_clone/routing/observers/guards/auth_guard.dart';
 
 import '../pages/single_listing_page.dart';
 
@@ -35,6 +36,7 @@ class AppRouter extends _$AppRouter {
               durationInMilliseconds: 0,
               transitionsBuilder: TransitionsBuilders.noTransition),
           CustomRoute(
+              guards: [AuthGuard()],
               path: "library",
               page: Library.page,
               durationInMilliseconds: 0,

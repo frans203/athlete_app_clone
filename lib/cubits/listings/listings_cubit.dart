@@ -23,7 +23,6 @@ class ListingsCubit extends Cubit<ListingsState> {
             searchLimit: searchLimit,
             searchPage: searchPage),
       );
-      print(listings);
     } catch (error) {
       emit(state.copyWith(listingStatus: ListingStatus.ERROR));
       print(error);
@@ -53,7 +52,6 @@ class ListingsCubit extends Cubit<ListingsState> {
             searchLimit: searchLimit,
             searchPage: searchPage),
       );
-      print(listings);
     } catch (error) {
       emit(state.copyWith(listingStatus: ListingStatus.ERROR));
       print(error);

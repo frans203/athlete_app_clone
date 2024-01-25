@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pod1um_flutter_clone/cubits/login/login_cubit.dart';
 import 'package:pod1um_flutter_clone/cubits/pages/pages_cubit.dart';
 import 'package:pod1um_flutter_clone/cubits/single_listing/single_listing_cubit.dart';
 import 'package:pod1um_flutter_clone/widgets/listing_page/listing_modal/listing_join_modal/listing_join_modal.dart';
@@ -19,11 +20,22 @@ class SingleListingPage extends StatefulWidget {
   State<SingleListingPage> createState() => _SingleListingPageState();
 }
 
-class _SingleListingPageState extends State<SingleListingPage> {
+class _SingleListingPageState extends State<SingleListingPage>
+    with AutoRouteAwareStateMixin<SingleListingPage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    context.read<SingleListingCubit>().setCurrentListingPageData(id: widget.id);
+    dynamic user = context.read<LoginCubit>().state.user;
+    if (user == null) {
+      context
+          .read<SingleListingCubit>()
+          .setCurrentListingPageData(id: widget.id);
+    } else if (user != null) {
+      String token = user['token'];
+      context
+          .read<SingleListingCubit>()
+          .setCurrentListingPageData(id: widget.id, token: token);
+    }
   }
 
   @override
@@ -71,5 +83,15 @@ class _SingleListingPageState extends State<SingleListingPage> {
         ),
       ),
     );
+  }
+
+  @override
+  void didPopNext() {
+    context.read<PagesCubit>().changePage(Pages.EXPLORE);
+  }
+
+  @override
+  void didPush() {
+    context.read<PagesCubit>().changePage(Pages.EXPLORE);
   }
 }

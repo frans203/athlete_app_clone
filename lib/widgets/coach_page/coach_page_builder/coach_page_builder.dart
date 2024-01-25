@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pod1um_flutter_clone/cubits/login/login_cubit.dart';
 import 'package:pod1um_flutter_clone/cubits/single_coach/single_coach_cubit.dart';
 import 'package:pod1um_flutter_clone/widgets/coach_page/coach_page_details_section/coach_page_details_section.dart';
 import 'package:pod1um_flutter_clone/widgets/coach_page/coach_page_hero_section/coach_page_hero_section.dart';
@@ -18,10 +19,17 @@ class CoachPageBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    dynamic user = context.read<LoginCubit>().state.user;
+    String? token;
+    if (user == null) {
+      token = null;
+    } else {
+      token = user['token'];
+    }
     return FutureBuilder(
       future: context
           .read<SingleCoachCubit>()
-          .setCurrentCoachPageData(coachId: coachId),
+          .setCurrentCoachPageData(coachId: coachId, token: token),
       builder: (context, snapshot) {
         return BlocBuilder<SingleCoachCubit, SingleCoachState>(
           builder: (context, state) {

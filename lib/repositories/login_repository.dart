@@ -20,13 +20,16 @@ class LoginRepository {
         "email": "$email",
         "password": "$password",
       });
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString("user", response.body);
-      final userJson = json.decode(response.body);
-      if (userJson['statusCode'] == 401) {
-        throw userJson;
+
+      final user = json.decode(response.body);
+      if (user['statusCode'] == 401) {
+        throw user;
       }
-      return userJson;
+      if (user['token'] != null) {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString("user", response.body);
+      }
+      return user;
     } catch (error) {
       print(error);
       throw error;
