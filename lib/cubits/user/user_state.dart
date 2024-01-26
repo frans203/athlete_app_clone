@@ -5,21 +5,50 @@ enum FollowBtnStatus {
   LOADING,
 }
 
+enum SaveWishlistBtnStatus {
+  LOADED,
+  LOADING,
+}
+
 class UserState extends Equatable {
   bool isFollowingCoach;
+  bool isSavedWhishlist;
   FollowBtnStatus followBtnStatus;
-  UserState({required this.isFollowingCoach, required this.followBtnStatus});
+  SaveWishlistBtnStatus saveWishlistBtnStatus;
+
+  UserState({
+    required this.isFollowingCoach,
+    required this.followBtnStatus,
+    required this.isSavedWhishlist,
+    required this.saveWishlistBtnStatus,
+  });
 
   factory UserState.initial() {
     return UserState(
-        isFollowingCoach: false, followBtnStatus: FollowBtnStatus.LOADING);
+        isFollowingCoach: false,
+        followBtnStatus: FollowBtnStatus.LOADING,
+        saveWishlistBtnStatus: SaveWishlistBtnStatus.LOADING,
+        isSavedWhishlist: false);
   }
-  List<Object> get props => [isFollowingCoach, followBtnStatus];
+  List<Object> get props => [
+        isFollowingCoach,
+        followBtnStatus,
+        isSavedWhishlist,
+        saveWishlistBtnStatus
+      ];
 
-  UserState copyWith(
-      {bool? isFollowingCoach, FollowBtnStatus? followBtnStatus}) {
+  UserState copyWith({
+    bool? isFollowingCoach,
+    FollowBtnStatus? followBtnStatus,
+    bool? isSavedWhishlist,
+    SaveWishlistBtnStatus? saveWishlistBtnStatus,
+  }) {
     return UserState(
-        followBtnStatus: followBtnStatus ?? this.followBtnStatus,
-        isFollowingCoach: isFollowingCoach ?? this.isFollowingCoach);
+      saveWishlistBtnStatus:
+          saveWishlistBtnStatus ?? this.saveWishlistBtnStatus,
+      followBtnStatus: followBtnStatus ?? this.followBtnStatus,
+      isSavedWhishlist: isSavedWhishlist ?? this.isSavedWhishlist,
+      isFollowingCoach: isFollowingCoach ?? this.isFollowingCoach,
+    );
   }
 }

@@ -30,15 +30,49 @@ class UserCubit extends Cubit<UserState> {
 
   Future<void> isFollowingCoach(
       {required int coachId, required String token}) async {
-    emit(state.copyWith(followBtnStatus: FollowBtnStatus.LOADING));
+    emit(state.copyWith(saveWishlistBtnStatus: SaveWishlistBtnStatus.LOADING));
     try {
       bool? isFollowingCoach =
           await userRepository.isFollowingCoach(coachId: coachId, token: token);
       emit(state.copyWith(
-          followBtnStatus: FollowBtnStatus.LOADED,
+          saveWishlistBtnStatus: SaveWishlistBtnStatus.LOADED,
           isFollowingCoach: isFollowingCoach));
     } catch (error) {
-      emit(state.copyWith(followBtnStatus: FollowBtnStatus.LOADED));
+      emit(state.copyWith(saveWishlistBtnStatus: SaveWishlistBtnStatus.LOADED));
+      print(error);
+    }
+  }
+
+  Future<void> isSavedWhishlist(
+      {required int listingId, required String token}) async {
+    emit(state.copyWith(saveWishlistBtnStatus: SaveWishlistBtnStatus.LOADING));
+
+    try {
+      bool? isSavedWhishlist = await userRepository.isSavedWhishlist(
+          listingId: listingId, token: token);
+      emit(state.copyWith(saveWishlistBtnStatus: SaveWishlistBtnStatus.LOADED));
+      emit(state.copyWith(isSavedWhishlist: isSavedWhishlist));
+    } catch (error) {
+      print(error);
+    }
+  }
+
+  Future<void> saveWhishlist(
+      {required int listingId, required String token}) async {
+    emit(state.copyWith(isSavedWhishlist: true));
+    try {
+      await userRepository.saveWhishlist(listingId: listingId, token: token);
+    } catch (error) {
+      print(error);
+    }
+  }
+
+  Future<void> unSaveWhishlist(
+      {required int listingId, required String token}) async {
+    emit(state.copyWith(isSavedWhishlist: false));
+    try {
+      await userRepository.unSaveWhishlist(listingId: listingId, token: token);
+    } catch (error) {
       print(error);
     }
   }
