@@ -1,12 +1,25 @@
 part of "user_cubit.dart";
 
+enum FollowBtnStatus {
+  LOADED,
+  LOADING,
+}
+
 class UserState extends Equatable {
-  UserState();
-  @override
-  // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
+  bool isFollowingCoach;
+  FollowBtnStatus followBtnStatus;
+  UserState({required this.isFollowingCoach, required this.followBtnStatus});
 
   factory UserState.initial() {
-    return UserState();
+    return UserState(
+        isFollowingCoach: false, followBtnStatus: FollowBtnStatus.LOADING);
+  }
+  List<Object> get props => [isFollowingCoach, followBtnStatus];
+
+  UserState copyWith(
+      {bool? isFollowingCoach, FollowBtnStatus? followBtnStatus}) {
+    return UserState(
+        followBtnStatus: followBtnStatus ?? this.followBtnStatus,
+        isFollowingCoach: isFollowingCoach ?? this.isFollowingCoach);
   }
 }

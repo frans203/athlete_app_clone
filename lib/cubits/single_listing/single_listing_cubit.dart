@@ -53,10 +53,6 @@ class SingleListingCubit extends Cubit<SingleListingState> {
       final dynamic listingReviews = await listingRepository.getListingReviews(
           listingId: currentListing['id']);
       bool? isFollowingCoach = null;
-      if (token != null) {
-        isFollowingCoach = await coachRepository.isFollowingCoach(
-            coachId: currentListing['user']['id'], token: token);
-      }
       emit(
         state.copyWith(
           status: SingleListingStatus.LOADED,

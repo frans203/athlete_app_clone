@@ -60,16 +60,18 @@ class _Pod1umAppState extends State<Pod1umApp> {
           ),
           BlocProvider<SingleCoachCubit>(
             create: (context) => SingleCoachCubit(
-                listingRepository: context.read<ListingRepository>(),
-                coachRepository: context.read<CoachRepository>(),
-                userRepository: context.read<UserRepository>(),
-                userCubit: context.read<UserCubit>()),
+              listingRepository: context.read<ListingRepository>(),
+              coachRepository: context.read<CoachRepository>(),
+              userRepository: context.read<UserRepository>(),
+            ),
           ),
           BlocProvider<LoginCubit>(
               create: (context) =>
                   LoginCubit(loginRepository: context.read<LoginRepository>())),
           BlocProvider<UserCubit>(
-            create: (context) => UserCubit(),
+            create: (context) => UserCubit(
+              userRepository: context.read<UserRepository>(),
+            ),
           )
         ],
         child: MaterialApp.router(

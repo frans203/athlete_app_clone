@@ -14,7 +14,6 @@ class SingleListingState extends Equatable {
   bool showAllReviews;
   SingleListingStatus status;
   bool isSavedCurrentListing;
-  bool isFollowingCoach;
 
   SingleListingState({
     required this.currentListing,
@@ -23,18 +22,17 @@ class SingleListingState extends Equatable {
     required this.currentListingReviews,
     required this.showAllReviews,
     required this.isSavedCurrentListing,
-    required this.isFollowingCoach,
   });
 
   factory SingleListingState.initial() {
     return SingleListingState(
-        currentListing: null,
-        currentCoachListing: null,
-        currentListingReviews: [],
-        status: SingleListingStatus.INITIAL,
-        showAllReviews: false,
-        isSavedCurrentListing: false,
-        isFollowingCoach: false);
+      currentListing: null,
+      currentCoachListing: null,
+      currentListingReviews: [],
+      status: SingleListingStatus.INITIAL,
+      showAllReviews: false,
+      isSavedCurrentListing: false,
+    );
   }
 
   @override
@@ -44,7 +42,6 @@ class SingleListingState extends Equatable {
         currentCoachListing,
         currentListingReviews,
         showAllReviews,
-        isFollowingCoach,
         isSavedCurrentListing,
       ];
 
@@ -66,7 +63,6 @@ class SingleListingState extends Equatable {
       showAllReviews: showAllReviews ?? this.showAllReviews,
       isSavedCurrentListing:
           isSavedCurrentListing ?? this.isSavedCurrentListing,
-      isFollowingCoach: isFollowingCoach ?? this.isFollowingCoach,
     );
   }
 }

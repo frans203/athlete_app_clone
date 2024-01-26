@@ -8,9 +8,15 @@ import 'package:pod1um_flutter_clone/widgets/listing_page/listing_page_coach_ima
 import 'package:pod1um_flutter_clone/widgets/listing_page/listing_page_coach_section/listing_page_coach_follow_btn.dart';
 import 'package:star_rating/star_rating.dart';
 
-class ListingPageCoachSection extends StatelessWidget {
+class ListingPageCoachSection extends StatefulWidget {
   ListingPageCoachSection({super.key});
 
+  @override
+  State<ListingPageCoachSection> createState() =>
+      _ListingPageCoachSectionState();
+}
+
+class _ListingPageCoachSectionState extends State<ListingPageCoachSection> {
   @override
   Widget build(BuildContext context) {
     var router = AutoRouter.of(context);
