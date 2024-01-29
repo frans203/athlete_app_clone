@@ -10,6 +10,8 @@ class ListingPageDetailsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     dynamic currentListing =
         context.read<SingleListingCubit>().state.currentListing;
+    print('currentListing');
+    print(currentListing['trainingPlan']);
     return Container(
       padding: EdgeInsets.all(16.0),
       child: Column(
@@ -20,19 +22,22 @@ class ListingPageDetailsSection extends StatelessWidget {
             style: TextStyle(color: Color(0xffC8C6CA), fontSize: 22),
           ),
           SizedBox(height: 32.0),
-          Row(
-            children: [
-              ChipComponent(
-                text: "${currentListing['trainingPlan']['frequency']}x/week",
-              ),
-              SizedBox(
-                width: 16.0,
-              ),
-              ChipComponent(
-                  text: '${currentListing['trainingPlan']['duration']} '
-                      'week${currentListing['trainingPlan']['duration'] > 1 ? "s" : ""}')
-            ],
-          ),
+          currentListing['trainingPlan'] != null
+              ? Row(
+                  children: [
+                    ChipComponent(
+                      text:
+                          "${currentListing['trainingPlan']['frequency']}x/week",
+                    ),
+                    SizedBox(
+                      width: 16.0,
+                    ),
+                    ChipComponent(
+                        text: '${currentListing['trainingPlan']['duration']} '
+                            'week${currentListing['trainingPlan']['duration'] > 1 ? "s" : ""}')
+                  ],
+                )
+              : Container(),
           SizedBox(height: 32.0),
           Text(
             "${currentListing['description']}",

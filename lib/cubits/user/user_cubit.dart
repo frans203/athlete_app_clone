@@ -30,15 +30,19 @@ class UserCubit extends Cubit<UserState> {
 
   Future<void> isFollowingCoach(
       {required int coachId, required String token}) async {
-    emit(state.copyWith(saveWishlistBtnStatus: SaveWishlistBtnStatus.LOADING));
+    emit(state.copyWith(
+      followBtnStatus: FollowBtnStatus.LOADING,
+    ));
     try {
       bool? isFollowingCoach =
           await userRepository.isFollowingCoach(coachId: coachId, token: token);
       emit(state.copyWith(
-          saveWishlistBtnStatus: SaveWishlistBtnStatus.LOADED,
+          followBtnStatus: FollowBtnStatus.LOADED,
           isFollowingCoach: isFollowingCoach));
     } catch (error) {
-      emit(state.copyWith(saveWishlistBtnStatus: SaveWishlistBtnStatus.LOADED));
+      emit(state.copyWith(
+        followBtnStatus: FollowBtnStatus.LOADED,
+      ));
       print(error);
     }
   }

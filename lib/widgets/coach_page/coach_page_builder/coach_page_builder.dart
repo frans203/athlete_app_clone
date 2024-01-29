@@ -8,7 +8,7 @@ import 'package:pod1um_flutter_clone/widgets/coach_page/coach_page_hero_section/
 import 'package:pod1um_flutter_clone/widgets/coach_page/coach_page_listings_section/coach_page_listings_section.dart';
 import 'package:pod1um_flutter_clone/widgets/coach_page/coach_page_testimonials_section/coach_page_testimonials_section.dart';
 
-class CoachPageBuilder extends StatelessWidget {
+class CoachPageBuilder extends StatefulWidget {
   int coachId;
   TabController tabController;
   Map<String, GlobalKey<State<StatefulWidget>>?> tabKeysMap;
@@ -16,6 +16,13 @@ class CoachPageBuilder extends StatelessWidget {
       {required this.coachId,
       required this.tabKeysMap,
       required this.tabController});
+
+  @override
+  State<CoachPageBuilder> createState() => _CoachPageBuilderState();
+}
+
+class _CoachPageBuilderState extends State<CoachPageBuilder> {
+  final GlobalKey scrollableTabBarKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +33,14 @@ class CoachPageBuilder extends StatelessWidget {
     } else {
       token = user['token'];
     }
+
     return FutureBuilder(
       future: context
           .read<SingleCoachCubit>()
-          .setCurrentCoachPageData(coachId: coachId, token: token),
+          .setCurrentCoachPageData(coachId: widget.coachId, token: token),
       builder: (context, snapshot) {
-        return BlocBuilder<SingleCoachCubit, SingleCoachState>(
+        return BlocConsumer<SingleCoachCubit, SingleCoachState>(
+          listener: (context, state) {},
           builder: (context, state) {
             if (state.singleCoachPageStatus == SingleCoachPageStatus.LOADING) {
               return Container(
@@ -55,21 +64,24 @@ class CoachPageBuilder extends StatelessWidget {
                                 border: Border(
                                     bottom: BorderSide(
                                         color: Color(0xff353438), width: 2.0))),
-                            child: ScrollableTabBar(
-                              tabkeyItems: tabKeysMap,
-                              tabController: tabController,
-                              isScrollable: true,
-                              tabBarIndicatorSize: TabBarIndicatorSize.tab,
+                            child: Container(
+                              key: scrollableTabBarKey,
+                              child: ScrollableTabBar(
+                                tabkeyItems: widget.tabKeysMap,
+                                tabController: widget.tabController,
+                                isScrollable: true,
+                                tabBarIndicatorSize: TabBarIndicatorSize.tab,
+                              ),
                             ),
                           ),
                           CoachPageDetailsSection(
-                            key: tabKeysMap["About"],
+                            key: widget.tabKeysMap["About"],
                           ),
                           CoachPageTestimonialsSection(
-                            key: tabKeysMap["Testimonials"],
+                            key: widget.tabKeysMap["Testimonials"],
                           ),
                           CoachPageListingsSection(
-                            key: tabKeysMap["Training Plans"],
+                            key: widget.tabKeysMap["Training Plans"],
                           )
                         ],
                       ),

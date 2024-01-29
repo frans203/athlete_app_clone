@@ -21,9 +21,7 @@ class _DashboardState extends State<Dashboard>
             child: SearchTopBar(),
           ),
           preferredSize: Size.fromHeight(55)),
-      body: Expanded(
-        child: AutoRouter(),
-      ),
+      body: AutoRouter(),
     );
   }
 }

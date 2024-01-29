@@ -14,6 +14,7 @@ class ListingCard extends StatefulWidget {
 }
 
 class _ListingCardState extends State<ListingCard> {
+  String? errorImage = null;
   @override
   Widget build(BuildContext context) {
     List<dynamic> objectivesArray = widget.currentItem['objectives'];
@@ -39,9 +40,15 @@ class _ListingCardState extends State<ListingCard> {
                   topRight: Radius.circular(10),
                 ),
                 image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: NetworkImage(widget.currentItem["coverImage"]),
-                ),
+                    fit: BoxFit.cover,
+                    image: errorImage != null
+                        ? AssetImage(errorImage!) as ImageProvider<Object>
+                        : NetworkImage(widget.currentItem["coverImage"]),
+                    onError: (error, trace) {
+                      setState(() {
+                        errorImage = "assets/images/pre-season-cycle.png";
+                      });
+                    }),
               ),
             ),
             Container(

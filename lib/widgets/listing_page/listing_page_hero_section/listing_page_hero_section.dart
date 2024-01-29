@@ -8,8 +8,15 @@ import 'package:pod1um_flutter_clone/widgets/listing_page/listing_page_hero_sect
 import 'package:share_plus/share_plus.dart';
 import 'package:star_rating/star_rating.dart';
 
-class ListingPageHeroSection extends StatelessWidget {
+class ListingPageHeroSection extends StatefulWidget {
   ListingPageHeroSection();
+
+  @override
+  State<ListingPageHeroSection> createState() => _ListingPageHeroSectionState();
+}
+
+class _ListingPageHeroSectionState extends State<ListingPageHeroSection> {
+  String? errorImage = null;
 
   @override
   Widget build(BuildContext context) {
@@ -81,9 +88,15 @@ class ListingPageHeroSection extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(listing['coverImage']),
-                  ),
+                      fit: BoxFit.cover,
+                      image: errorImage != null
+                          ? AssetImage(errorImage!) as ImageProvider<Object>
+                          : NetworkImage(listing['coverImage']),
+                      onError: (error, trace) {
+                        setState(() {
+                          errorImage = "assets/images/pre-season-cycle.png";
+                        });
+                      }),
                 ),
               ),
             ],

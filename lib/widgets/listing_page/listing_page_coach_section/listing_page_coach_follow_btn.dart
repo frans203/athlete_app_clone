@@ -19,7 +19,6 @@ class ListingPageCoachFollowBtn extends StatelessWidget {
               .isFollowingCoach(coachId: coachId, token: token),
           builder: (context, snapshot) {
             return BlocBuilder<UserCubit, UserState>(builder: (context, state) {
-              print(state.isFollowingCoach);
               if (state.followBtnStatus == FollowBtnStatus.LOADED) {
                 return ElevatedButton(
                   onPressed: () async {

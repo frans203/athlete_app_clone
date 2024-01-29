@@ -6,6 +6,7 @@ class ScrollableTabBar extends StatefulWidget {
   TabController tabController;
   bool? isScrollable;
   TabBarIndicatorSize? tabBarIndicatorSize;
+
   ScrollableTabBar({
     required this.tabkeyItems,
     required this.tabController,
