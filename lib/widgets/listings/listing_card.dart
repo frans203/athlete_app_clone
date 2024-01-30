@@ -20,9 +20,8 @@ class _ListingCardState extends State<ListingCard> {
     List<dynamic> objectivesArray = widget.currentItem['objectives'];
     var router = AutoRouter.of(context);
 
-    return Container(
-      width: 339,
-      height: 361,
+    return Card(
+      color: Colors.transparent,
       child: InkWell(
         onTap: () {
           router.push(
@@ -31,24 +30,27 @@ class _ListingCardState extends State<ListingCard> {
         },
         child: Column(
           children: [
-            Container(
-              width: double.maxFinite,
-              height: 191,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
+            AspectRatio(
+              aspectRatio: 16 / 9,
+              child: Container(
+                width: double.maxFinite,
+                height: double.maxFinite,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                  ),
+                  image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: errorImage != null
+                          ? AssetImage(errorImage!) as ImageProvider<Object>
+                          : NetworkImage(widget.currentItem["coverImage"]),
+                      onError: (error, trace) {
+                        setState(() {
+                          errorImage = "assets/images/pre-season-cycle.png";
+                        });
+                      }),
                 ),
-                image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: errorImage != null
-                        ? AssetImage(errorImage!) as ImageProvider<Object>
-                        : NetworkImage(widget.currentItem["coverImage"]),
-                    onError: (error, trace) {
-                      setState(() {
-                        errorImage = "assets/images/pre-season-cycle.png";
-                      });
-                    }),
               ),
             ),
             Container(

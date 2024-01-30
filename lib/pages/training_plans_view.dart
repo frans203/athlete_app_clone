@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pod1um_flutter_clone/constants/breakpoints.dart';
 import 'package:pod1um_flutter_clone/cubits/listings/listings_cubit.dart';
-import 'package:pod1um_flutter_clone/widgets/listings/listing_card.dart';
-import 'package:pod1um_flutter_clone/widgets/listings/load_more.dart';
+import 'package:pod1um_flutter_clone/widgets/listings/listings_page_column.dart';
+import 'package:pod1um_flutter_clone/widgets/listings/listings_page_grid.dart';
+import 'package:responsive_framework/responsive_breakpoints.dart';
 
 class TrainingPlansView extends StatefulWidget {
   const TrainingPlansView({super.key});
@@ -45,20 +47,10 @@ class _TrainingPlansViewState extends State<TrainingPlansView> {
                           // height: MediaQuery.of(context).size.height * 0.85,
                           padding: EdgeInsets.only(
                               bottom: MediaQuery.of(context).size.height * 0.2),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              for (int i = 0;
-                                  i < state.listings['rows'].length;
-                                  i++)
-                                ListingCard(
-                                    currentItem: state.listings["rows"][i]),
-                              state.listings['count'] >
-                                      state.listings['rows'].length
-                                  ? LoadMoreBtn()
-                                  : Container(),
-                            ],
-                          ));
+                          child: ResponsiveBreakpoints.of(context)
+                                  .largerOrEqualTo(SMALL)
+                              ? ListingsPageGrid()
+                              : ListingsPageColumn());
                     } else {
                       return Container();
                     }

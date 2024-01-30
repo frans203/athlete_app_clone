@@ -43,29 +43,27 @@ class _BottomNavBarState extends State<BottomNavBar> with RouteAware {
             page: Feed(),
             pageToChange: Pages.FEED,
           ),
-          BlocBuilder<LoginCubit, LoginState>(
-            builder: (context, state)  {
-              if(state.user != null){
-                return BottomAppBarItem(
-                  icon: Icons.folder_open_outlined,
-                  selectedIcon: Icons.folder,
-                  labelText: "Library",
-                  page: Library(),
-                  pageToChange: Pages.LIBRARY,
-                );
-              }
-              if(state.user == null) {
-                return BottomAppBarItem(
-                  icon: Icons.login,
-                  selectedIcon: Icons.login,
-                  labelText: "Login",
-                  page: Library(),
-                  pageToChange: Pages.LIBRARY,
-                );
-              }
-              return Container();
+          BlocBuilder<LoginCubit, LoginState>(builder: (context, state) {
+            if (state.user != null) {
+              return BottomAppBarItem(
+                icon: Icons.folder_open_outlined,
+                selectedIcon: Icons.folder,
+                labelText: "Library",
+                page: Library(),
+                pageToChange: Pages.LIBRARY,
+              );
             }
-          )
+            if (state.user == null) {
+              return BottomAppBarItem(
+                icon: Icons.login,
+                selectedIcon: Icons.login,
+                labelText: "Login",
+                page: Library(),
+                pageToChange: Pages.LIBRARY,
+              );
+            }
+            return Container();
+          })
         ],
       ),
       color: Color(0xFF131316),
