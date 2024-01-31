@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pod1um_flutter_clone/constants/breakpoints.dart';
 import 'package:pod1um_flutter_clone/constants/constants.dart';
 import 'package:pod1um_flutter_clone/cubits/single_listing/single_listing_cubit.dart';
 import 'package:pod1um_flutter_clone/widgets/listing_page/listing_reviews_section/listing_review.dart';
+import 'package:responsive_framework/responsive_breakpoints.dart';
 
 class ListingReviewsSection extends StatefulWidget {
   ListingReviewsSection();
@@ -12,6 +14,22 @@ class ListingReviewsSection extends StatefulWidget {
 }
 
 class _ListingReviewsSectionState extends State<ListingReviewsSection> {
+  int numberOfItems = 1;
+  @override
+  void didChangeDependencies() {
+    if (ResponsiveBreakpoints.of(context).largerOrEqualTo(EXTRA_SMALL)) {
+      setState(() {
+        numberOfItems = 1;
+      });
+    }
+    if (ResponsiveBreakpoints.of(context).largerOrEqualTo(MEDIUM)) {
+      setState(() {
+        numberOfItems = 2;
+      });
+    }
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     dynamic currentListing =
@@ -19,7 +37,6 @@ class _ListingReviewsSectionState extends State<ListingReviewsSection> {
     // List<dynamic> currentReviews =
     //     context.read<SingleListingCubit>().state.currentListingReviews;
     List<dynamic> currentReviews = [...reviewsMock];
-    print(currentReviews);
 
     return currentReviews.length > 0
         ? Container(
@@ -35,7 +52,9 @@ class _ListingReviewsSectionState extends State<ListingReviewsSection> {
                         Text(
                           'Reviews',
                           style: TextStyle(
-                              fontSize: 22.0, color: Color(0xffC8C6CA)),
+                            fontSize: 22.0,
+                            color: Color(0xffC8C6CA),
+                          ),
                         ),
                         SizedBox(
                           width: 6.0,

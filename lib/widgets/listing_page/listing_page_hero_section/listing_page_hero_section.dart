@@ -2,10 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pod1um_flutter_clone/cubits/single_listing/single_listing_cubit.dart';
+import 'package:pod1um_flutter_clone/helper_functions/shareFunction.dart';
 import 'package:pod1um_flutter_clone/routing/app_router.dart';
 import 'package:pod1um_flutter_clone/widgets/listing_page/listing_page_hero_section/listing_page_hero_action.dart';
 import 'package:pod1um_flutter_clone/widgets/listing_page/listing_page_hero_section/listing_page_save.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:star_rating/star_rating.dart';
 
 class ListingPageHeroSection extends StatefulWidget {
@@ -23,14 +23,6 @@ class _ListingPageHeroSectionState extends State<ListingPageHeroSection> {
     dynamic listing = context.read<SingleListingCubit>().state.currentListing;
     var router = AutoRouter.of(context);
     int currentScore = listing['score'];
-
-    Future<void> shareFunction() async {
-      try {
-        await Share.share("Text");
-      } catch (error) {
-        print(error);
-      }
-    }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

@@ -47,10 +47,7 @@ class _TrainingPlansViewState extends State<TrainingPlansView> {
                           // height: MediaQuery.of(context).size.height * 0.85,
                           padding: EdgeInsets.only(
                               bottom: MediaQuery.of(context).size.height * 0.2),
-                          child: ResponsiveBreakpoints.of(context)
-                                  .largerOrEqualTo(SMALL)
-                              ? ListingsPageGrid()
-                              : ListingsPageColumn());
+                          child: ListingsPageGrid());
                     } else {
                       return Container();
                     }

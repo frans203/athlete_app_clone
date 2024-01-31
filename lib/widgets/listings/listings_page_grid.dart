@@ -17,12 +17,12 @@ class _ListingsPageGridState extends State<ListingsPageGrid> {
   int numberOfItems = 1;
   @override
   void didChangeDependencies() {
-    if (ResponsiveBreakpoints.of(context).equals(EXTRA_SMALL)) {
+    if (ResponsiveBreakpoints.of(context).largerOrEqualTo(EXTRA_SMALL)) {
       setState(() {
         numberOfItems = 1;
       });
     }
-    if (ResponsiveBreakpoints.of(context).equals(MEDIUM)) {
+    if (ResponsiveBreakpoints.of(context).largerOrEqualTo(MEDIUM)) {
       setState(() {
         numberOfItems = 3;
       });
@@ -45,21 +45,22 @@ class _ListingsPageGridState extends State<ListingsPageGrid> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ListingsCubit, ListingsState>(
-      listener: (context, state) {
-        print('teste');
-      },
-      builder: (context, state) => Container(
-        width: double.maxFinite,
-        height: double.maxFinite,
-        child: ResponsiveGridList(
-            desiredItemWidth:
-                (MediaQuery.of(context).size.width / numberOfItems).toDouble(),
-            minSpacing: 10,
-            children:
-                List.generate(state.listings['rows'].length, (index) => index)
-                    .map((i) {
-              return ListingCard(currentItem: state.listings['rows'][i]);
-            }).toList()),
+      listener: (context, state) {},
+      builder: (context, state) => SingleChildScrollView(
+        child: Container(
+          width: double.maxFinite,
+          height: double.maxFinite,
+          child: ResponsiveGridList(
+              desiredItemWidth:
+                  (MediaQuery.of(context).size.width / numberOfItems)
+                      .toDouble(),
+              minSpacing: 10,
+              children:
+                  List.generate(state.listings['rows'].length, (index) => index)
+                      .map((i) {
+                return ListingCard(currentItem: state.listings['rows'][i]);
+              }).toList()),
+        ),
       ),
     );
   }

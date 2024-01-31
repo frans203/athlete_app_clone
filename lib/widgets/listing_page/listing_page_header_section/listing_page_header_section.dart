@@ -1,8 +1,10 @@
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:pod1um_flutter_clone/constants/breakpoints.dart";
 import "package:pod1um_flutter_clone/cubits/single_listing/single_listing_cubit.dart";
 import "package:pod1um_flutter_clone/helper_functions/getInterestLabel.dart";
 import 'package:pod1um_flutter_clone/widgets/listing_page/listing_page_coach_image/listing_page_coach_image.dart';
+import "package:responsive_framework/responsive_breakpoints.dart";
 
 class ListingPageHeaderSection extends StatefulWidget {
   const ListingPageHeaderSection({super.key});
@@ -32,15 +34,20 @@ class _ListingPageHeaderSectionState extends State<ListingPageHeaderSection> {
           Column(
             children: [
               Container(
-                width: MediaQuery.of(context).size.width * 0.6,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "Training plan by ${currentCoach['name']}",
-                      style: TextStyle(
-                        color: Color(0xffC8C6CA),
-                        fontSize: 22,
+                    Container(
+                      width: ResponsiveBreakpoints.of(context)
+                              .largerOrEqualTo(MEDIUM)
+                          ? 400
+                          : 200,
+                      child: Text(
+                        "Training plan by ${currentCoach['name']}",
+                        style: TextStyle(
+                          color: Color(0xffC8C6CA),
+                          fontSize: 22,
+                        ),
                       ),
                     ),
                     Text(

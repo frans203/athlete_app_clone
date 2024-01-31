@@ -41,7 +41,7 @@ class _ListingCardState extends State<ListingCard> {
                     topRight: Radius.circular(10),
                   ),
                   image: DecorationImage(
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
                       image: errorImage != null
                           ? AssetImage(errorImage!) as ImageProvider<Object>
                           : NetworkImage(widget.currentItem["coverImage"]),

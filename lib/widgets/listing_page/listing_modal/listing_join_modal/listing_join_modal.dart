@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:pod1um_flutter_clone/constants/breakpoints.dart';
 import 'package:pod1um_flutter_clone/widgets/listing_page/listing_modal/listing_join_modal/listing_join_modal_service_btn.dart';
 import 'package:pod1um_flutter_clone/widgets/listing_page/listing_modal/listing_modal_action.dart';
+import 'package:responsive_framework/responsive_breakpoints.dart';
 
 class ListingJoinModal extends StatelessWidget {
   const ListingJoinModal({super.key});
@@ -25,6 +27,9 @@ class ListingJoinModal extends StatelessWidget {
             ),
           ),
           Container(
+            width: ResponsiveBreakpoints.of(context).largerOrEqualTo(MEDIUM)
+                ? 400
+                : double.maxFinite,
             padding: EdgeInsets.all(10.0),
             child: Column(
               children: [
@@ -33,9 +38,15 @@ class ListingJoinModal extends StatelessWidget {
                   serviceIconData: FontAwesomeIcons.google,
                   size: 18,
                 ),
+                SizedBox(
+                  height: 10,
+                ),
                 ListingJoinModalServiceBtn(
                   serviceTitle: "Facebook",
                   serviceIconData: Icons.facebook,
+                ),
+                SizedBox(
+                  height: 10,
                 ),
                 ListingJoinModalServiceBtn(
                   serviceTitle: "Apple",
@@ -44,8 +55,20 @@ class ListingJoinModal extends StatelessWidget {
               ],
             ),
           ),
-          ListingModalAction(
-            text: "Create Account",
+          Text(
+            "Or",
+            style: TextStyle(color: Color(0xffC8C6CA)),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Container(
+            width: ResponsiveBreakpoints.of(context).largerOrEqualTo(MEDIUM)
+                ? 400
+                : double.maxFinite,
+            child: ListingModalAction(
+              text: "Create Account",
+            ),
           ),
         ],
       ),
