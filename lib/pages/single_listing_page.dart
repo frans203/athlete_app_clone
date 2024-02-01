@@ -39,38 +39,35 @@ class _SingleListingPageState extends State<SingleListingPage>
   @override
   Widget build(BuildContext context) {
     context.read<PagesCubit>().changePage(Pages.EXPLORE);
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          width: double.maxFinite,
-          child: BlocConsumer<SingleListingCubit, SingleListingState>(
-            builder: (context, state) {
-              if (state.status == SingleListingStatus.LOADING) {
-                return Container(
-                  margin: EdgeInsets.only(top: 20),
-                  child: Center(
-                    child: CircularProgressIndicator(),
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      child: SingleChildScrollView(
+        child: BlocConsumer<SingleListingCubit, SingleListingState>(
+          builder: (context, state) {
+            if (state.status == SingleListingStatus.LOADING) {
+              return Container(
+                margin: EdgeInsets.only(top: 20),
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            } else if (state.status == SingleListingStatus.LOADED) {
+              return Container(
+                decoration: BoxDecoration(
+                  color: Color(0xff131316),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(16),
                   ),
-                );
-              } else if (state.status == SingleListingStatus.LOADED) {
-                return Container(
-                  decoration: BoxDecoration(
-                    color: Color(0xff131316),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(16),
-                    ),
-                  ),
-                  child:
-                      ResponsiveBreakpoints.of(context).largerOrEqualTo(MEDIUM)
-                          ? ListingPageWebWidgets()
-                          : ListingPageMobileWidgets(),
-                );
-              } else {
-                return Container();
-              }
-            },
-            listener: (context, state) {},
-          ),
+                ),
+                child: ResponsiveBreakpoints.of(context).largerOrEqualTo(MEDIUM)
+                    ? ListingPageWebWidgets()
+                    : ListingPageMobileWidgets(),
+              );
+            } else {
+              return Container();
+            }
+          },
+          listener: (context, state) {},
         ),
       ),
     );

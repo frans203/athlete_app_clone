@@ -22,7 +22,7 @@ class _ListingsPageGridState extends State<ListingsPageGrid> {
         numberOfItems = 1;
       });
     }
-    if (ResponsiveBreakpoints.of(context).largerOrEqualTo(MEDIUM)) {
+    if (ResponsiveBreakpoints.of(context).largerOrEqualTo(SMALL)) {
       setState(() {
         numberOfItems = 3;
       });
@@ -38,7 +38,6 @@ class _ListingsPageGridState extends State<ListingsPageGrid> {
       });
     }
 
-    print(numberOfItems);
     super.didChangeDependencies();
   }
 
@@ -46,22 +45,17 @@ class _ListingsPageGridState extends State<ListingsPageGrid> {
   Widget build(BuildContext context) {
     return BlocConsumer<ListingsCubit, ListingsState>(
       listener: (context, state) {},
-      builder: (context, state) => SingleChildScrollView(
-        child: Container(
-          width: double.maxFinite,
-          height: double.maxFinite,
-          child: ResponsiveGridList(
-              desiredItemWidth:
-                  (MediaQuery.of(context).size.width / numberOfItems)
-                      .toDouble(),
-              minSpacing: 10,
-              children:
-                  List.generate(state.listings['rows'].length, (index) => index)
-                      .map((i) {
-                return ListingCard(currentItem: state.listings['rows'][i]);
-              }).toList()),
-        ),
-      ),
+      builder: (context, state) => ResponsiveGridList(
+          shrinkWrap: true,
+          scroll: false,
+          desiredItemWidth:
+              (MediaQuery.of(context).size.width / numberOfItems).toDouble(),
+          minSpacing: 10,
+          children:
+              List.generate(state.listings['rows'].length, (index) => index)
+                  .map((i) {
+            return ListingCard(currentItem: state.listings['rows'][i]);
+          }).toList()),
     );
   }
 }

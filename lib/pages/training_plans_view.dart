@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pod1um_flutter_clone/constants/breakpoints.dart';
 import 'package:pod1um_flutter_clone/cubits/listings/listings_cubit.dart';
-import 'package:pod1um_flutter_clone/widgets/listings/listings_page_column.dart';
 import 'package:pod1um_flutter_clone/widgets/listings/listings_page_grid.dart';
-import 'package:responsive_framework/responsive_breakpoints.dart';
 
 class TrainingPlansView extends StatefulWidget {
   const TrainingPlansView({super.key});
@@ -44,10 +41,10 @@ class _TrainingPlansViewState extends State<TrainingPlansView> {
                         state.listingStatus ==
                             ListingStatus.LOADING_MORE_LISTINGS) {
                       return Container(
-                          // height: MediaQuery.of(context).size.height * 0.85,
-                          padding: EdgeInsets.only(
-                              bottom: MediaQuery.of(context).size.height * 0.2),
-                          child: ListingsPageGrid());
+                        padding: EdgeInsets.only(
+                            bottom: MediaQuery.of(context).size.height * 0.2),
+                        child: ListingsPageGrid(),
+                      );
                     } else {
                       return Container();
                     }

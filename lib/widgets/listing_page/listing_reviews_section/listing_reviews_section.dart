@@ -40,6 +40,14 @@ class _ListingReviewsSectionState extends State<ListingReviewsSection> {
 
     return currentReviews.length > 0
         ? Container(
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  width: 2.0,
+                  color: Color(0xff2A2A2D),
+                ),
+              ),
+            ),
             padding: EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -116,6 +124,7 @@ class _ListingReviewsSectionState extends State<ListingReviewsSection> {
                                     ),
                                   ),
                                 ),
+                                SizedBox(height: 16.0),
                               ],
                             )
                           : Container(),

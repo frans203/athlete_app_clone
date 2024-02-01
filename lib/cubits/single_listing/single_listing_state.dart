@@ -11,6 +11,7 @@ class SingleListingState extends Equatable {
   dynamic currentListing;
   dynamic currentCoachListing;
   dynamic currentListingReviews;
+  dynamic similarListings;
   bool showAllReviews;
   SingleListingStatus status;
   bool isSavedCurrentListing;
@@ -22,6 +23,7 @@ class SingleListingState extends Equatable {
     required this.currentListingReviews,
     required this.showAllReviews,
     required this.isSavedCurrentListing,
+    required this.similarListings,
   });
 
   factory SingleListingState.initial() {
@@ -29,6 +31,7 @@ class SingleListingState extends Equatable {
       currentListing: null,
       currentCoachListing: null,
       currentListingReviews: [],
+      similarListings: [],
       status: SingleListingStatus.INITIAL,
       showAllReviews: false,
       isSavedCurrentListing: false,
@@ -43,6 +46,7 @@ class SingleListingState extends Equatable {
         currentListingReviews,
         showAllReviews,
         isSavedCurrentListing,
+        similarListings,
       ];
 
   SingleListingState copyWith({
@@ -50,9 +54,11 @@ class SingleListingState extends Equatable {
     dynamic currentCoachListing,
     dynamic status,
     dynamic currentListingReviews,
+    dynamic similarListings,
     bool? showAllReviews,
     bool? isSavedCurrentListing,
     bool? isFollowingCoach,
+
   }) {
     return SingleListingState(
       currentCoachListing: currentCoachListing ?? this.currentCoachListing,
@@ -63,6 +69,7 @@ class SingleListingState extends Equatable {
       showAllReviews: showAllReviews ?? this.showAllReviews,
       isSavedCurrentListing:
           isSavedCurrentListing ?? this.isSavedCurrentListing,
+      similarListings: similarListings ?? this.similarListings,
     );
   }
 }

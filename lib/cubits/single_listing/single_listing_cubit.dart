@@ -48,20 +48,23 @@ class SingleListingCubit extends Cubit<SingleListingState> {
         currentCoachListing: null));
     try {
       final dynamic currentListing = await listingRepository.getListing(id: id);
-      final dynamic coach = await coachRepository.getSingleCoach(
-          id: currentListing['user']['id']);
-      final dynamic listingReviews = await listingRepository.getListingReviews(
-          listingId: currentListing['id']);
+      var promises = await Future.wait([
+        coachRepository.getSingleCoach(id: currentListing['user']['id']),
+        listingRepository.getListingReviews(listingId: currentListing['id']),
+        listingRepository.getListings()
+      ]);
+      print("SIMILAR LISTINGS");
+      print(promises[2]);
       bool? isFollowingCoach = null;
       emit(
         state.copyWith(
-          status: SingleListingStatus.LOADED,
-          currentCoachListing: coach,
-          currentListing: currentListing,
-          currentListingReviews: listingReviews,
-          showAllReviews: false,
-          isFollowingCoach: isFollowingCoach,
-        ),
+            status: SingleListingStatus.LOADED,
+            currentCoachListing: promises[0],
+            currentListing: currentListing,
+            currentListingReviews: promises[1],
+            showAllReviews: false,
+            isFollowingCoach: isFollowingCoach,
+            similarListings: promises[2]),
       );
     } catch (error) {
       emit(state.copyWith(

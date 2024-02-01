@@ -4,6 +4,7 @@ import 'package:pod1um_flutter_clone/widgets/listing_page/listing_page_coach_sec
 import 'package:pod1um_flutter_clone/widgets/listing_page/listing_page_details_section/listing_page_details_section.dart';
 import 'package:pod1um_flutter_clone/widgets/listing_page/listing_page_header_section/listing_page_header_section.dart';
 import 'package:pod1um_flutter_clone/widgets/listing_page/listing_page_hero_section/listing_page_hero_section.dart';
+import 'package:pod1um_flutter_clone/widgets/listing_page/listing_page_similar_listings_section/listing_page_similar_listings_section.dart';
 import 'package:pod1um_flutter_clone/widgets/listing_page/listing_reviews_section/listing_reviews_section.dart';
 
 class ListingPageMobileWidgets extends StatelessWidget {
@@ -20,6 +21,7 @@ class ListingPageMobileWidgets extends StatelessWidget {
         ListingJoinModal(),
         ListingPageCoachSection(),
         ListingReviewsSection(),
+        ListingPageSimilarListingsSection()
       ],
     );
   }

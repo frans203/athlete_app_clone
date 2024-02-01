@@ -27,7 +27,7 @@ class _ListingPageCoachSectionState extends State<ListingPageCoachSection> {
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            width: 1.0,
+            width: 2.0,
             color: Color(0xff2A2A2D),
           ),
         ),

@@ -59,10 +59,8 @@ class ListingReviewsSectionWeb extends StatelessWidget {
                     children: [
                       Container(
                         width: double.maxFinite,
-                        height: state.showAllReviews
-                            ? 200.0 * (currentReviews.length / 2)
-                            : 200,
                         child: ResponsiveGridList(
+                            shrinkWrap: true,
                             desiredItemWidth:
                                 MediaQuery.of(context).size.width * 0.7 / 3,
                             children: List.generate(
