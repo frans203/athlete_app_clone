@@ -5,6 +5,7 @@ import 'package:pod1um_flutter_clone/constants/breakpoints.dart';
 import 'package:pod1um_flutter_clone/cubits/login/login_cubit.dart';
 import 'package:pod1um_flutter_clone/cubits/pages/pages_cubit.dart';
 import 'package:pod1um_flutter_clone/cubits/single_listing/single_listing_cubit.dart';
+import 'package:pod1um_flutter_clone/widgets/global/dashboard_animation_control/DashboardAnimationControl.dart';
 import 'package:pod1um_flutter_clone/widgets/listing_page/listing_page_responsive/listing_page_mobile_widgets.dart';
 import 'package:pod1um_flutter_clone/widgets/listing_page/listing_page_responsive/listing_page_web_widgets.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
@@ -41,7 +42,7 @@ class _SingleListingPageState extends State<SingleListingPage>
     context.read<PagesCubit>().changePage(Pages.EXPLORE);
     return Container(
       width: MediaQuery.of(context).size.width,
-      child: SingleChildScrollView(
+      child: DashboardAnimationControl(
         child: BlocConsumer<SingleListingCubit, SingleListingState>(
           builder: (context, state) {
             if (state.status == SingleListingStatus.LOADING) {

@@ -5,6 +5,7 @@ import 'package:pod1um_flutter_clone/cubits/pages/pages_cubit.dart';
 import 'package:pod1um_flutter_clone/cubits/single_coach/single_coach_cubit.dart';
 import 'package:pod1um_flutter_clone/widgets/coach_page/coach_page_builder/coach_page_builder.dart';
 import 'package:pod1um_flutter_clone/widgets/coach_page/coach_page_tab_bar/coach_page_tab_bar.dart';
+import 'package:pod1um_flutter_clone/widgets/global/dashboard_animation_control/DashboardAnimationControl.dart';
 
 @RoutePage(name: "Coach")
 class SingleCoachPage extends StatefulWidget {
@@ -19,7 +20,14 @@ class _SingleCoachPageState extends State<SingleCoachPage>
   var aboutSection = GlobalKey();
   var testimonialsSection = GlobalKey();
   var listingsSection = GlobalKey();
-  ScrollController scrollController = ScrollController();
+
+  void listenScrollChangeTabBar(ScrollController scrollController) {
+    if (scrollController.offset >= 200) {
+      context.read<SingleCoachCubit>().showScrollableTabBar(true);
+    } else if (scrollController.offset < 200) {
+      context.read<SingleCoachCubit>().showScrollableTabBar(false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,19 +40,11 @@ class _SingleCoachPageState extends State<SingleCoachPage>
     };
 
     TabController _tabController = TabController(length: 4, vsync: this);
-    scrollController.addListener(() {
-      if (scrollController.offset >= 200) {
-        context.read<SingleCoachCubit>().showScrollableTabBar(true);
-      } else if (scrollController.offset < 200) {
-        context.read<SingleCoachCubit>().showScrollableTabBar(false);
-      }
-    });
-
     return Scaffold(
         body: Stack(
       children: [
-        SingleChildScrollView(
-          controller: scrollController,
+        DashboardAnimationControl(
+          additionalScrollFunction: listenScrollChangeTabBar,
           child: Container(
             width: double.maxFinite,
             child: CoachPageBuilder(
@@ -57,12 +57,6 @@ class _SingleCoachPageState extends State<SingleCoachPage>
         CoachPageTabBar(tabKeysMap: tabKeysMap, tabController: _tabController)
       ],
     ));
-  }
-
-  @override
-  void dispose() {
-    scrollController.dispose();
-    super.dispose();
   }
 
   @override

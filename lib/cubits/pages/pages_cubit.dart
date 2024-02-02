@@ -9,4 +9,12 @@ class PagesCubit extends Cubit<PageState> {
   void changePage(Pages newPage) {
     emit(state.copyWith(currentPage: newPage));
   }
+
+  void showSearchBar(bool showSearchBar) {
+    emit(state.copyWith(showSearchBar: showSearchBar));
+  }
+
+  void setEnteredPage(bool enteredPage) {
+    emit(state.copyWith(enteredPage: enteredPage));
+  }
 }

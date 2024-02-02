@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pod1um_flutter_clone/cubits/listings/listings_cubit.dart';
+import 'package:pod1um_flutter_clone/widgets/global/dashboard_animation_control/DashboardAnimationControl.dart';
 import 'package:pod1um_flutter_clone/widgets/listings/listings_page_grid.dart';
 
 class TrainingPlansView extends StatefulWidget {
-  const TrainingPlansView({super.key});
+  TrainingPlansView({super.key});
 
   @override
   State<TrainingPlansView> createState() => _TrainingPlansViewState();
 }
 
 class _TrainingPlansViewState extends State<TrainingPlansView> {
+  ScrollController scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return DashboardAnimationControl(
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -54,5 +57,11 @@ class _TrainingPlansViewState extends State<TrainingPlansView> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
   }
 }
